@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Latéral</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.0.24/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            transition: transform 0.3s ease;
+        }
+        .sidebar-open {
+            transform: translateX(0);
+        }
+        .sidebar-closed {
+            transform: translateX(-100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Menu Latéral -->
+    <div id="sidebar" class="sidebar fixed top-0 left-0 h-full w-64 bg-gray-800 text-white sidebar-closed">
+        <div class="p-4">
+            <h2 class="text-xl font-bold">Menu</h2>
+            <ul>
+                <li><a href="#" class="block py-2 px-4 hover:bg-gray-700">Accueil</a></li>
+                <li><a href="#" class="block py-2 px-4 hover:bg-gray-700">À Propos</a></li>
+                <li><a href="#" class="block py-2 px-4 hover:bg-gray-700">Services</a></li>
+                <li><a href="#" class="block py-2 px-4 hover:bg-gray-700">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="ml-64 p-4">
+        <button id="menu-toggle" class="bg-blue-500 text-white py-2 px-4 rounded">
+            Ouvrir Menu
+        </button>
+        <h1 class="text-2xl font-bold mt-4">Contenu Principal</h1>
+        <p class="mt-2">Voici le contenu principal de la page.</p>
+    </div>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('sidebar-open')) {
+                sidebar.classList.remove('sidebar-open');
+                sidebar.classList.add('sidebar-closed');
+                this.textContent = 'Ouvrir Menu';
+            } else {
+                sidebar.classList.remove('sidebar-closed');
+                sidebar.classList.add('sidebar-open');
+                this.textContent = 'Fermer Menu';
+            }
+        });
+    </script>
+</body>
+</html>
