@@ -1,0 +1,206 @@
+{
+  "profile": [
+    {
+      "idp": 1,
+      "libp": "Admin"
+    },
+    {
+      "idp": 2,
+      "libp": "Utilisateur"
+    },
+    {
+      "idp": 3,
+      "libp": "Client"
+    }
+  ],
+  "users": [
+    {
+      "idu": 1,
+      "nom": "Diop",
+      "prenom": "Amadou",
+      "login": "adiop",
+      "mdp": "password123",
+      "idProfile": 1
+    },
+    {
+      "idu": 2,
+      "nom": "Ndoye",
+      "prenom": "Fatou",
+      "login": "fndoye",
+      "mdp": "password123",
+      "idProfile": 2
+    }
+  ],
+  "client": [
+    {
+      "idcl": 1,
+      "nomc": "Seck",
+      "prenomc": "Mamadou",
+      "tel": "776543210",
+      "email": "mamadou.seck@example.com",
+      "adresse": "Dakar",
+      "categorie": "solvable",
+      "sexe": "M",
+      "photo": "img1.jpg"
+    },
+    {
+      "idcl": 2,
+      "nomc": "Ba",
+      "prenomc": "Aissatou",
+      "tel": "776543211",
+      "email": "aissatou.ba@example.com",
+      "adresse": "Thies",
+      "categorie": "fidele",
+      "sexe": "F",
+      "photo": "img2.jpg"
+    },
+    {
+      "idcl": 3,
+      "nomc": "Sow",
+      "prenomc": "Oumar",
+      "tel": "776234567",
+      "email": "oumar.sow@example.com",
+      "adresse": "Louga",
+      "categorie": "nouveau",
+      "sexe": "M",
+      "photo": "img3.jpg"
+    },
+    {
+      "idcl": 4,
+      "nomc": "Gaye",
+      "prenomc": "Sokhna",
+      "tel": "774567890",
+      "email": "sokhna.gaye@example.com",
+      "adresse": "Saint-Louis",
+      "categorie": "non solvable",
+      "sexe": "F",
+      "photo": "img4.jpg"
+    }
+  ],
+  "depot": [
+    {
+      "iddep": 1,
+      "numerodep": "DEP001",
+      "montantdep": 50000.0,
+      "datedep": "2023-07-01",
+      "idClient": 1
+    },
+    {
+      "iddep": 2,
+      "numerodep": "DEP002",
+      "montantdep": 30000.0,
+      "datedep": "2023-07-15",
+      "idClient": 2
+    },
+    {
+      "iddep": 3,
+      "numerodep": "DEP003",
+      "montantdep": 75000.0,
+      "datedep": "2023-08-01",
+      "idClient": 3
+    },
+    {
+      "iddep": 4,
+      "numerodep": "DEP004",
+      "montantdep": 45000.0,
+      "datedep": "2023-08-10",
+      "idClient": 4
+    }
+  ],
+  "dette": [
+    {
+      "iddet": 1,
+      "numerodet": "DET001",
+      "datedet": "2023-06-01",
+      "montandet": 15000.0,
+      "idClient": 1
+    },
+    {
+      "iddet": 2,
+      "numerodet": "DET002",
+      "datedet": "2023-06-10",
+      "montandet": 20000.0,
+      "idClient": 2
+    },
+    {
+      "iddet": 3,
+      "numerodet": "DET003",
+      "datedet": "2023-07-20",
+      "montandet": 25000.0,
+      "idClient": 3
+    },
+    {
+      "iddet": 4,
+      "numerodet": "DET004",
+      "datedet": "2023-07-25",
+      "montandet": 35000.0,
+      "idClient": 4
+    }
+  ],
+  "article": [
+    {
+      "idart": 1,
+      "refart": "ART001",
+      "libart": "Riz",
+      "prixu": 500.0,
+      "qteStock": 100
+    },
+    {
+      "idart": 2,
+      "refart": "ART002",
+      "libart": "Huile",
+      "prixu": 1200.0,
+      "qteStock": 50
+    },
+    {
+      "idart": 3,
+      "refart": "ART003",
+      "libart": "Sucre",
+      "prixu": 300.0,
+      "qteStock": 150
+    },
+    {
+      "idart": 4,
+      "refart": "ART004",
+      "libart": "Sel",
+      "prixu": 100.0,
+      "qteStock": 200
+    }
+  ],
+  "artdette": [
+    { "idDette": 1, "idArticle": 1, "qte": 10, "prix": 5000.0 },
+    { "idDette": 2, "idArticle": 2, "qte": 5, "prix": 6000.0 },
+    { "idDette": 3, "idArticle": 3, "qte": 15, "prix": 4500.0 },
+    { "idDette": 4, "idArticle": 4, "qte": 25, "prix": 2500.0 }
+  ],
+  "paiement": [
+    {
+      "idpay": 1,
+      "numeropay": "PAY001",
+      "datepay": "2023-07-01",
+      "montantpay": 15000.0,
+      "idDette": 1
+    },
+    {
+      "idpay": 2,
+      "numeropay": "PAY002",
+      "datepay": "2023-07-15",
+      "montantpay": 20000.0,
+      "idDette": 2
+    },
+    {
+      "idpay": 3,
+      "numeropay": "PAY003",
+      "datepay": "2023-08-10",
+      "montantpay": 25000.0,
+      "idDette": 3
+    },
+    {
+      "idpay": 4,
+      "numeropay": "PAY004",
+      "datepay": "2023-08-15",
+      "montantpay": 35000.0,
+      "idDette": 4
+    }
+  ]
+}
