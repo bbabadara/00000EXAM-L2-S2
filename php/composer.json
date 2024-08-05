@@ -1,0 +1,23 @@
+{
+    "name": "bbaba/php",
+    "type": "projet",
+    "autoload": {
+        "psr-4": {
+            "Boutik\\App\\": "src/",
+            "Boutik\\Models\\": "src/models/",
+            "Boutik\\Controllers\\": "src/controllers/",
+            "Boutik\\Config\\": "src/config/",
+            "Boutik\\Core\\Validator\\": "src/core/validator/",
+            "Boutik\\Core\\Controller\\": "src/core/controller/",
+            "Boutik\\Core\\Session\\": "src/core/session/"
+
+        }
+    },
+    "authors": [
+        {
+            "name": "bbabadara",
+            "email": "bbabadara@gmail.com"
+        }
+    ],
+    "require": {}
+}
