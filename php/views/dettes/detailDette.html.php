@@ -83,7 +83,7 @@
              <!-- Partie paiement -->
              <h1 class="text-gray-900 text-2xl text-bold ">Liste des paiement(3)</h1>
              <div class="w-10/12 mt-2">
-                <form class=" "  method="get">
+                <form class=" "  method="post">
                     <div class=" w-full flex items-center ">
                         <input type="text" id="art" aria-label="art" name="montantpay"  aria-describedby="helper-text-explanation" class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
                        <input type="hidden" name="controller" value="dettes">

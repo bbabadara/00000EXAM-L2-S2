@@ -43,8 +43,11 @@ class DetteController  extends CoreController {
         if (isset($_REQUEST["idDette"])){
             $key=$_REQUEST["idDette"];
             if (isset($_REQUEST["verif"]) && $_REQUEST["verif"]=="addpay") {
-                parent::unsetKey($_GET,["controller","verif","action"]);
-                // parent::dd($_GET);
+                parent::unsetKey($_POST,["controller","verif","action"]);
+                $_POST["numeropay"]=self::genererNumeroPAY();
+                $_POST["datepay"]=date("Y-m-d");
+                $this->detteModel->doInsert("paiement",$_POST);
+                //  parent::dd($_GET);
             }
             parent::loadview("dettes/detailDette",[
                 "dette"=>$this->detteModel->findById($key),
@@ -58,6 +61,11 @@ class DetteController  extends CoreController {
     }
     public function addDette(){
         parent::loadview("dettes/ajoutDette");
+    }
+
+    public function genererNumeroPAY() {
+        $n = mt_rand(0, 9999999999);
+        return 'PAY' . str_pad($n, 10, '0', STR_PAD_LEFT);
     }
    
 }
