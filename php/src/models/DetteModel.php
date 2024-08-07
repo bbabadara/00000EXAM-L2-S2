@@ -9,9 +9,14 @@ class DetteModel extends CoreModel{
        parent::__construct();
 
     }
-public function getAll(){
-     $sql="SELECT d.*,cl.*,SUM(montantpay) verse,(d.montantdet - SUM(p.montantpay)) AS restant FROM `dette`d JOIN client cl on d.idClient=cl.idcl JOIN paiement p on d.iddet=p.idDette GROUP BY cl.idcl HAVING restant>0";
-    //  $sql="SELECT d.*,cl.*,SUM(montantpay) verse,(d.montantdet - SUM(p.montantpay)) AS restant FROM `dette`d JOIN client cl on d.idClient=cl.idcl JOIN paiement p on d.iddet=p.idDette GROUP BY cl.idcl";
+public function getAll($tel=""){
+    //  $sql="SELECT d.*,cl.*,SUM(montantpay) verse,(d.montantdet - SUM(p.montantpay)) AS restant FROM `dette`d JOIN client cl on d.idClient=cl.idcl JOIN paiement p on d.iddet=p.idDette GROUP BY cl.idcl HAVING restant>0";
+      $sql="SELECT d.*,cl.*,SUM(montantpay) verse,(d.montantdet - SUM(p.montantpay)) AS restant FROM `dette`d JOIN client cl on d.idClient=cl.idcl JOIN paiement p on d.iddet=p.idDette GROUP BY cl.idcl";
+    return parent::doSelect($sql);
+}
+public function findByTel($tel){
+    //  $sql="SELECT d.*,cl.*,SUM(montantpay) verse,(d.montantdet - SUM(p.montantpay)) AS restant FROM `dette`d JOIN client cl on d.idClient=cl.idcl JOIN paiement p on d.iddet=p.idDette GROUP BY cl.idcl HAVING restant>0";
+      $sql="SELECT d.*,cl.*,SUM(montantpay) verse,(d.montantdet - SUM(p.montantpay)) AS restant FROM `dette`d JOIN client cl on d.idClient=cl.idcl JOIN paiement p on d.iddet=p.idDette where cl.tel=$tel GROUP BY cl.idcl";
     return parent::doSelect($sql);
 }
 public function findById($id){

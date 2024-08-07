@@ -1,3 +1,10 @@
+<?php
+$errors=[];
+if ($this->session->isset("errors")) {
+    $errors=$this->session->get("errors");
+    $this->session->unset("errors");
+}
+?>
 <div class="p-4 border-1 border-gray-200  rounded-lg dark:border-gray-700 ">
             <h1 class="text-gray-900 text-2xl text-bold ">Enregistrer une dettes</h1>
             <!-- Partie recherche client -->

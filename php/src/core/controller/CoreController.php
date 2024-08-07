@@ -54,10 +54,7 @@ class CoreController
             unset($tab[$key]);
         }
     }
-    public function estPositive($val)
-    {
-        return $val > 0 ? true : false;
-    }
+  
 
     public function dd($test)
     {

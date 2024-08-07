@@ -1,4 +1,10 @@
-
+<?php
+$errors=[];
+if ($this->session->isset("errors")) {
+    $errors=$this->session->get("errors");
+    $this->session->unset("errors");
+}
+?>
 
 <div class="p-4 border-1 border-gray-200  rounded-lg dark:border-gray-700 ">
             <div class="w-11/12 ">
@@ -15,19 +21,26 @@
                 <div class="w-11/12 flex justify-between px-8 items-center">
                     <!-- formulaire recherche tel -->
                     <div class="w-2/5">
-                        <form class="max-w-sm mx-auto row">
+                        <form action="" class="max-w-sm mx-auto row" method="get">
                              <div class=" flex items-center justify-between">
-                            <div class="mb-5 flex items-center ">
-                              <label for="email" class="block w-32  text-xl font-medium text-gray-900 dark:text-black">Telephone: </label>
-                              <input type="email" id="email" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="771234567">
+                                <div class="mb-5">
+                            <div class=" flex items-center ">
+                              <label for="tel" class="block w-32  text-xl font-medium text-gray-900 dark:text-black">Telephone: </label>
+                              <input type="text" id="tel" name="telclient" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ex: 771234567">
+                              </div>
+                              <p class="text-sm text-red-600 dark:text-red-400"> <?=$errors["telclient"]??""?> uioiew</p>
                             </div>
-                            <button type="submit" class="text-white  mb-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">OK</button>
+                            <input type="hidden" name="controller" value="dettes">
+                            <input type="hidden" name="verif" value="findbytel">
+                            <button type="submit" name="action" value="liste" class="text-white  mb-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">OK</button>
                         </div>
+                        
+
                         </form>
 
                     </div>
                     <!-- LES TAGS -->
-                    <div class="w-2/5">
+                    <!-- <div class="w-2/5">
                         <div class="flex items-center justify-center py-2 md:py-2 flex-wrap">
                             <button type="button"
                                 class="text-blue-700 hover:text-white border border-blue-600 bg-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-base font-medium px-3 py-2.5 text-center me-3 mb-3 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:bg-gray-800 dark:focus:ring-blue-800">Tous</button>
@@ -37,7 +50,7 @@
                                 class="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-red-700 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-3 py-2.5 text-center me-3 mb-3 dark:text-white dark:focus:ring-gray-800">Non
                                 soldées</button>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="w-full ">

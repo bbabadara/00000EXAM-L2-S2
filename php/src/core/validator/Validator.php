@@ -18,8 +18,23 @@ public function validate( array $errors):bool
    return empty($errors);
 }
 
-public function verifNumber($n):bool{
-    return is_numeric($n);
+
+public function isNumeric(string $nameField, string $sms = "saisir un nombre")
+{
+    if (is_numeric($_REQUEST[$nameField])) {
+        return true;
+    }
+    $this->errors[$nameField]=$sms;
+    return false;
 }
+public function isPositif(string $nameField, string $sms = "saisir un nombre positif")
+{
+    if (intval($_REQUEST[$nameField])>0) {
+        return true;
+    }
+    $this->errors[$nameField]=$sms;
+    return false;
+}
+
 
 }

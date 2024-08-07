@@ -1,4 +1,11 @@
-<div class="p-4 border-1 border-gray-200  rounded-lg dark:border-gray-700 ">         
+<?php
+$errors=[];
+if ($this->session->isset("errors")) {
+    $errors=$this->session->get("errors");
+    $this->session->unset("errors");
+}
+?>
+<div class="p-4 border-1 border-gray-200  rounded-lg dark:border-gray-700 ">
             <h1 class="text-gray-900 text-2xl font-bold ">Details</h1>
             <div class="grid grid-cols-2 gap-4 mt-2 mb-4">
                 <!-- partie info dette -->
@@ -81,17 +88,19 @@
              </div>
 
              <!-- Partie paiement -->
-             <h1 class="text-gray-900 text-2xl text-bold ">Liste des paiement(3)</h1>
+             <h1 class="text-gray-900 text-2xl text-bold ">Liste des paiement(<?=count($paiements)?>)</h1>
              <div class="w-10/12 mt-2">
                 <form class=" "  method="post">
                     <div class=" w-full flex items-center ">
-                        <input type="text" id="art" aria-label="art" name="montantpay"  aria-describedby="helper-text-explanation" class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                        <input type="text"  id="art" aria-label="art" name="montantpay"  aria-describedby="helper-text-explanation" class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
                        <input type="hidden" name="controller" value="dettes">
                        <input type="hidden" name="idDette" value="<?=$dette->iddet?>">
                        <input type="hidden" name="verif" value="addpay">
+                       <input type="hidden" name="restant" value="<?=$dette->restant?> ">
                         <button type="submit" name="action" value="detail" class="text-white  ml-1  bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Enregistrer paiement</button>
                     </div>
-               
+                       <p class="mt-2 text-sm text-red-600 dark:text-red-400"> <?=$errors["montantpay"]??""?></p>
+
                 </form>
 
                 <div class="relative mt-3 overflow-x-auto w-full shadow-md sm:rounded-lg">
