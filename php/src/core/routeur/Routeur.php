@@ -1,7 +1,7 @@
 <?php
-namespace  Boutik\Config;
+namespace Boutik\Core\Routeur;
 use Boutik\Controllers\DetteController;
-class Router
+class Routeur
 {
     public function root()
     {
@@ -10,13 +10,16 @@ class Router
             if ($recup == "dettes") {
                 $controller=new DetteController;
                  $controller->load();
-                echo "dettes";
             } elseif ($recup == "articles") {
                 echo "articles";
             } elseif ($recup == "clients") {
                 echo "clients";
             } elseif ($recup == "depots") {
                 echo "depots";
+            } elseif ($recup == "paiement") {
+                echo "paiement";
+            }else{
+                echo "on y viendra";
             }
         } else {
             echo "default";

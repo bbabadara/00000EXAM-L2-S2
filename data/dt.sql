@@ -22,11 +22,11 @@ CREATE TABLE client (
     idcl INT AUTO_INCREMENT PRIMARY KEY,
     nomc VARCHAR(100) NOT NULL,
     prenomc VARCHAR(100) NOT NULL,
-    tel VARCHAR(15) NOT NULL,
+    tel VARCHAR(15) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     adresse TEXT NOT NULL,
     categorie ENUM('solvable', 'non solvable', 'fidele', 'nouveau') NOT NULL,
-    sexe CHAR(1) NOT NULL,
+    sexe ENUM('F','M') NOT NULL,
     photo BLOB
 );
 
@@ -43,7 +43,7 @@ CREATE TABLE dette (
     iddet INT AUTO_INCREMENT PRIMARY KEY,
     numerodet VARCHAR(100) UNIQUE NOT NULL,
     datedet DATE NOT NULL,
-    montandet DECIMAL(10, 2) NOT NULL,
+    montantdet DECIMAL(10, 2) NOT NULL,
     idClient INT,
     FOREIGN KEY (idClient) REFERENCES client(idcl)
 );
@@ -60,8 +60,7 @@ CREATE TABLE artdette (
     idDette INT,
     idArticle INT,
     qte INT NOT NULL,
-    prix DECIMAL(10, 2) NOT NULL,
-    PRIMARY KEY (idDette, idArticle),
+    prixAchat DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (idDette) REFERENCES dette(iddet),
     FOREIGN KEY (idArticle) REFERENCES article(idart)
 );
@@ -100,7 +99,7 @@ INSERT INTO depot (numerodep, montantdep, datedep, idClient) VALUES
 ('DEP004', 45000.00, '2023-08-10', 4);
 
 -- Insertion des dettes
-INSERT INTO dette (numerodet, datedet, montandet, idClient) VALUES
+INSERT INTO dette (numerodet, datedet, montantdet, idClient) VALUES
 ('DET001', '2023-06-01', 15000.00, 1),
 ('DET002', '2023-06-10', 20000.00, 2),
 ('DET003', '2023-07-20', 25000.00, 3),
@@ -114,7 +113,7 @@ INSERT INTO article (refart, libart, prixu, qteStock) VALUES
 ('ART004', 'Sel', 100.00, 200);
 
 -- Insertion des articles de dette
-INSERT INTO artdette (idDette, idArticle, qte, prix) VALUES
+INSERT INTO artdette (idDette, idArticle, qte, prixAchat) VALUES
 (1, 1, 10, 5000.00),
 (2, 2, 5, 6000.00),
 (3, 3, 15, 4500.00),
@@ -127,3 +126,14 @@ INSERT INTO paiement (numeropay, datepay, montantpay, idDette) VALUES
 ('PAY003', '2023-08-10', 25000.00, 3),
 ('PAY004', '2023-08-15', 35000.00, 4);
 
+--- requette page liste dette
+SELECT d.*,cl.*,SUM(montantpay) verse FROM `dette`d JOIN client cl on d.idClient=cl.idcl JOIN paiement p on d.iddet=p.idDette GROUP BY cl.idcl HAVING verse < d.montandet;
+SELECT d.*,cl.*,SUM(montantpay) verse FROM `dette`d JOIN client cl on d.idClient=cl.idcl JOIN paiement p on d.iddet=p.idDette where d.iddet=$id GROUP BY cl.idcl;
+
+----requette article
+SELECT * from article;
+SELECT *,(qte*prixAchat) sousTotal from article a join artdette ad on a.idart=ad.idArticle join dette d on ad.idDette=d.iddet WHERE d.iddet=$id;
+SELECT *,(qte*prixAchat) sousTotal,SUM((qte*prixAchat)) prixTotal from article a join artdette ad on a.idart=ad.idArticle join dette d on ad.idDette=d.iddet WHERE d.iddet=2 GROUP BY d.iddet;
+
+-- requette paiement
+SELECT * from paiement where idDette=1;
