@@ -10,6 +10,9 @@ class Session {
     public function add (string $key,$value){
         $_SESSION[$key]=$value;
     }
+    public function addtotable (string $key,$value){
+        $_SESSION[$key][]=$value;
+    }
     public function addAsoc (string $tab,string $key,$value){
         $_SESSION[$tab][$key]=$value;
     }
@@ -21,5 +24,8 @@ class Session {
     }
     public function unset (string $key){
         unset($_SESSION[$key]);
+    }
+    public function unset2 (string $key,$key2){
+        unset($_SESSION[$key][$key2]);
     }
 }

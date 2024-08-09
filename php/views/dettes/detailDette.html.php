@@ -97,7 +97,7 @@ if ($this->session->isset("errors")) {
                        <input type="hidden" name="idDette" value="<?=$dette->iddet?>">
                        <input type="hidden" name="verif" value="addpay">
                        <input type="hidden" name="restant" value="<?=$dette->restant?> ">
-                        <button type="submit" name="action" value="detail" class="text-white  ml-1  bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Enregistrer paiement</button>
+                        <button type="submit" name="action" value="detail" class="text-white  ml-1  bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 " <?=$disable?> >Enregistrer paiement</button>
                     </div>
                        <p class="mt-2 text-sm text-red-600 dark:text-red-400"> <?=$errors["montantpay"]??""?></p>
 
