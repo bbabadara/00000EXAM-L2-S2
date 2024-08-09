@@ -27,7 +27,8 @@ public function doInsert(string $table,array $data){
         $stmt->execute($data);
         return $this->pdo->lastInsertId();
 }
-public function doUpdate(){
-  echo "";
+public function doUpdate($sql,$data){
+  $stmt= $this->pdo->prepare($sql);
+  $stmt->execute($data);
 }
 }

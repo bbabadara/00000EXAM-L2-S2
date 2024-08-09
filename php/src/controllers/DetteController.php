@@ -157,6 +157,21 @@ class DetteController  extends CoreController
                 }
             }elseif($verif == "remove") {
                 $this->session->unset2("tabArticle",$_REQUEST["key"]);
+            }elseif($verif == "saveDette") {
+                $nDette = [
+                    "numerodet" => self::genererNumeroDette(),
+                    "datedet" => date("Y-m-d"),
+                    "montantdet" => intval($_REQUEST["montant"]),
+                    "idClient" => $this->session->get("client")->idcl
+                ];
+                // parent::dd($nDette);
+              $idDette=$this->detteModel->doInsert("dette",$nDette);
+              $this->detteModel->addToArtDette($idDette,$this->session->get("tabArticle"));
+              $this->detteModel->updateArticleStockAfterDette($this->session->get("tabArticle"));
+              $this->session->unset("client");
+              $this->session->unset("article");
+              $this->session->unset("tabArticle");
+              parent::redirect("dettes","detail",["idDette"=>$idDette]);
             }
         }
 
@@ -167,6 +182,11 @@ class DetteController  extends CoreController
     {
         $n = mt_rand(0, 9999999999);
         return 'PAY' . str_pad($n, 10, '0', STR_PAD_LEFT);
+    }
+    public function genererNumeroDette()
+    {
+        $n = mt_rand(0, 9999999999);
+        return 'DET' . str_pad($n, 10, '0', STR_PAD_LEFT);
     }
   public  function findArticleSessionByid($ref,$all){
     if(!empty($all)){
