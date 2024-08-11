@@ -59,7 +59,9 @@ class DetteController  extends CoreController
                 $this->session->add("errors", $this->validator->errors);
             }
         }
-        parent::loadview("dettes/listeDette", ["dettes" => $dettes]);
+        // parent::dd(serialize($dettes));
+        // parent::loadview("dettes/listeDette", ["dettes" => $dettes]);
+        parent::loadview("users/dashboard");
     }
     public function showDetailsDette()
     {

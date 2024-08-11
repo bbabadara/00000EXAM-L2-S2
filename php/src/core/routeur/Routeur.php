@@ -1,6 +1,9 @@
 <?php
 namespace Boutik\Core\Routeur;
 use Boutik\Controllers\DetteController;
+use Boutik\Controllers\SecurityController;
+use Boutik\Controllers\UserController;
+
 class Routeur
 {
     public function root()
@@ -16,13 +19,18 @@ class Routeur
                 echo "clients";
             } elseif ($recup == "depots") {
                 echo "depots";
-            } elseif ($recup == "paiement") {
-                echo "paiement";
+            } elseif ($recup == "security") {
+                $controller=new SecurityController;
+                $controller->load();
+            } elseif ($recup == "user") {
+                $controller=new UserController();
+                $controller->load();
             }else{
                 echo "on y viendra";
             }
         } else {
-            echo "default";
+            $controller=new SecurityController;
+                $controller->load();
         }
     }
 }
