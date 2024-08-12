@@ -6,6 +6,8 @@ use Boutik\Core\Model\CoreModel;
 class ClientModel extends CoreModel{
     public function __construct() {
        parent::__construct();
+       $this->table="client";
+       $this->primaryKey="idcl";
 
     }
 public function getAll(){

@@ -32,15 +32,22 @@ class SecurityController  extends CoreController
     public function login()
     {
         if (isset($_REQUEST["login"])) {
-        extract($_POST);
-        $userConnect = $this->userModel->findUserConnect($login, $mdp);
-        if ($userConnect) {
-            $this->session->add("userConnect", $userConnect);
-            parent::redirect("user", "dashboard");
-        } else {
-            $this->session->addAsoc("errors", "alert", "login ou mot de passe incorrect");
+            $this->session->add("userLog", $_POST);
+            $this->validator->isEmail("login");
+            $this->validator->isEmpty("mdp","mot de passe obligatoire");
+            if ($this->validator->validate($this->validator->errors)) {
+                extract($_POST);
+                $userConnect = $this->userModel->findUserConnect($login, $mdp);
+                if ($userConnect) {
+                    $this->session->add("userConnect", $userConnect);
+                    parent::redirect("user", "dashboard");
+                } else {
+                    $this->session->addAsoc("errors", "alert", "login ou mot de passe incorrect");
+                }
+            } else {
+                $this->session->add("errors", $this->validator->errors);
+            }
         }
-    }
         $this->loadview("security/login", [], "security");
     }
 

@@ -35,11 +35,11 @@ class CoreController
         return $link;
     }
 
-    public function redirect(string $controller, string $page, array $actions=[])
+    public function redirect(string $controller, string $action, array $additional=[])
     {
-        $ur="/?controller=$controller&action=$page";
-        if (!empty($actions)) {
-            foreach ($actions as $key => $value) {
+        $ur="/?controller=$controller&action=$action";
+        if (!empty($additional)) {
+            foreach ($additional as $key => $value) {
                 $ur = $ur . "&" . "$key=$value";
             }
         }

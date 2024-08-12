@@ -11,7 +11,7 @@ class UserController  extends CoreController
     {
         if (isset($_REQUEST["action"])) {
             $action = $_REQUEST["action"];
-            if ($action=="dasboard") {
+            if ($action=="dashboard") {
                 parent::loadview('users/dashboard');
             }
         }else{

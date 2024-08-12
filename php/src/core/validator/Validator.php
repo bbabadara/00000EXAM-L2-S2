@@ -35,6 +35,12 @@ public function isPositif(string $nameField, string $sms = "saisir un nombre pos
     $this->errors[$nameField]=$sms;
     return false;
 }
-
+public  function isEmail(string $inputField):bool{
+    if(!filter_var($_REQUEST[$inputField],FILTER_VALIDATE_EMAIL)){
+        $this->errors[$inputField]="Adresse email invalide";
+        return true;
+        }
+        return false;
+}
 
 }
