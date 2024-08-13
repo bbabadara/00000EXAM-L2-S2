@@ -10,10 +10,11 @@ class ClientModel extends CoreModel{
        $this->primaryKey="idcl";
 
     }
-public function getAll(){
-     $sql="SELECT * from client";
-    return parent::doSelect($sql);
-}
+
+//     public function getAll(){
+//      $sql="SELECT * from client";
+//     return parent::doSelect($sql);
+// }
 public function findByTel($tel){
     $sql="SELECT * from client where tel=$tel";
     return parent::doSelect($sql,true);

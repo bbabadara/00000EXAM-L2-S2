@@ -8,6 +8,7 @@ if ($this->session->isset("errors")) {
 }
 if ($this->session->isset("userLog")) {
   $userLog = $this->session->get("userLog");
+  $this->session->unset("userLog");
 }
 
 ?>

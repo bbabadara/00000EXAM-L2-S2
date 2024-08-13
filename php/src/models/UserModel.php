@@ -8,6 +8,7 @@ class UserModel extends CoreModel{
        parent::__construct();
        $this->table="users";
        $this->primaryKey="idu";
+       $this->nbrElement=3;
 
     }
 public function getAll(){

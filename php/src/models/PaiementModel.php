@@ -17,4 +17,10 @@ public function findAllByDetteId($id){
     return parent::doSelect($sql);
 }
 
+public function getPaiementToday(){
+    $sql="SELECT p.*,d.iddet FROM paiement p JOIN dette d ON p.idDette = d.iddet WHERE p.datepay = CURDATE()";
+    $count="SELECT count(*) as count FROM paiement p JOIN dette d ON p.idDette = d.iddet WHERE p.datepay = CURDATE()";
+    return [parent::doSelect($sql),parent::doSelect($count,true)];
+}
+
 }

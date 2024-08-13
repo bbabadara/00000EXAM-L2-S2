@@ -27,6 +27,7 @@ class DetteController  extends CoreController
     }
     public function load()
     {
+         
         if (isset($_REQUEST["action"])) {
             $action = $_REQUEST["action"];
             if ($action == "liste") {
@@ -60,8 +61,7 @@ class DetteController  extends CoreController
             }
         }
         // parent::dd(serialize($dettes));
-        // parent::loadview("dettes/listeDette", ["dettes" => $dettes]);
-        parent::loadview("users/dashboard");
+         parent::loadview("dettes/listeDette", ["dettes" => $dettes]);
     }
     public function showDetailsDette()
     {
