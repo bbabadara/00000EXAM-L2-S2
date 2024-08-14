@@ -1,4 +1,4 @@
-<div class="flex-1 p-6">
+<div class="p-6">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Carte des statistiques -->
         <div class="bg-white p-4 rounded shadow-md">
@@ -25,12 +25,12 @@
         <!-- Carte des statistiques -->
         <div class="bg-white p-4 rounded shadow-md">
             <h2 class="text-gray-700 text-lg font-bold mb-2">Liste des dettes d'Aujourd'hui</h2>
-            <p class="text-2xl font-bold"> soon</p>
+            <p class="text-xl "> soon</p>
         </div>
 
         <div class="bg-white p-4 rounded shadow-md">
             <h2 class="text-gray-700 text-lg font-bold mb-2">Liste des paiement d'Aujourd'hui</h2>
-            <p class="text-2xl font-bold">soon</p>
+            <p class="text-xl ">soon</p>
         </div>
 
       

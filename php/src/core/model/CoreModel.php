@@ -77,7 +77,7 @@ class CoreModel
         return ["datas"=>$this->doSelect($sql),"count"=>$this->doSelect($count,true)] ;
     }
 
-    private function generateCondition(array $filtre)
+    protected function generateCondition(array $filtre)
     {
        
         $conditions = "";

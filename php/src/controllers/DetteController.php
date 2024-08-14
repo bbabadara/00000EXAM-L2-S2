@@ -46,22 +46,22 @@ class DetteController  extends CoreController
 
     public function showListDette()
     {
-        $dettes = $this->detteModel->getAll();
-        if (isset($_REQUEST["verif"]) && $_REQUEST["verif"] == "findbytel") {
-            $this->validator->isEmpty("telclient");
-            if ($this->validator->validate($this->validator->errors)) {
-                $recup = $this->detteModel->findByTel($_REQUEST["telclient"]);
-                if (!empty($recup)) {
-                    $dettes = $recup;
-                } else {
-                    $this->session->addAsoc("errors", "telclient", "Client introuvable");
-                }
-            } else {
-                $this->session->add("errors", $this->validator->errors);
-            }
+        $elementPerPage=3;
+        $page=$_REQUEST["page"]??"1";
+        $offset=($page-1)*$elementPerPage;
+        $datas=$this->detteModel->findBy007([],$offset);
+        if (isset($_REQUEST["verif"])) {
+            $datas=$this->detteModel->findBy007(["tel"=>$_REQUEST["tel"],"datedet"=>$_REQUEST["datedet"],"etatdet"=>$_REQUEST["etatdet"]],$offset);
         }
-        // parent::dd(serialize($dettes));
-         parent::loadview("dettes/listeDette", ["dettes" => $dettes]);
+        $dettes=$datas["datas"];
+        $count=$datas['count']->count;
+        $nbrPage=ceil($count/$elementPerPage);
+         parent::loadview("dettes/listeDette", [
+            "dettes" => $dettes,
+            "page" => $page,
+            "nbrPage"=>$nbrPage,
+            "filtre"=>["tel"=>$_REQUEST["tel"]??"","datedet"=>$_REQUEST["datedet"]??"","etatdet"=>$_REQUEST["etatdet"]??""]
+        ]);
     }
     public function showDetailsDette()
     {

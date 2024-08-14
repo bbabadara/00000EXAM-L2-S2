@@ -12,6 +12,7 @@ class SecurityController  extends CoreController
     {
         parent::__construct();
         $this->userModel = new UserModel();
+        
     }
     public function load()
     {
@@ -21,8 +22,6 @@ class SecurityController  extends CoreController
                 self::login();
             } elseif ($action == "logout") {
                 self::logout();
-            } else {
-                parent::redirect("errors", "");
             }
         } else {
             self::login();
@@ -31,6 +30,9 @@ class SecurityController  extends CoreController
 
     public function login()
     {
+        if ($this->session->isset("userConnect")) {
+            parent::redirect("user","dashboard");
+         }
         if (isset($_REQUEST["login"])) {
             $this->session->add("userLog", $_POST);
             $this->validator->isEmail("login");

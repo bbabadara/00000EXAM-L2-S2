@@ -3,16 +3,22 @@ namespace Boutik\Core\Routeur;
 use Boutik\Controllers\DetteController;
 use Boutik\Controllers\SecurityController;
 use Boutik\Controllers\UserController;
+use Boutik\Core\Controller\CoreController;
+use Boutik\Core\Session\Session;
 
 class Routeur
 {
+    private Session $session;
+    private CoreController $coreController;
+    public function __construct() {
+       $this->session= new Session();
+       $this->coreController = new CoreController();
+    }
     public function root()
     {
-        // if (empty($_SESSION["userConnect"]) && $_REQUEST["controller"]!="security") {
-        //     $controller=new SecurityController;
-        //         $controller->load();
-        //         exit;
-        // }
+        if (!$this->session->isset("userConnect") && $_REQUEST["controller"]!="security") {
+           $this->coreController->redirect("security","login");
+        }
 
         if (isset($_REQUEST["controller"])) {
             $recup = $_REQUEST["controller"];

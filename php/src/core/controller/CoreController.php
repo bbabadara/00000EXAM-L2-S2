@@ -61,7 +61,7 @@ class CoreController
         echo "<pre>";
         var_dump($test);
         echo "</pre>";
-        die("ok");
+        die("Yallah Pitié");
     }
 
     public function dump($test)
