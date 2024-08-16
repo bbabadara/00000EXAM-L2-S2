@@ -80,41 +80,42 @@ class PaiementController  extends CoreController
     $this->pdf->AddPage();
     $this->pdf->SetFont('helvetica', 'B', 16);
     // Section Boutique
-    $this->pdf->Cell(0, 10, 'Boutique Bi', 0, 1, 'C');
+    $this->pdf->Cell(0, 7, 'Boutique Bi', 0, 1, 'C');
     $this->pdf->SetFont('helvetica', '', 12);
     $this->pdf->Cell(0, 10, 'Dieupeul Dakar', 0, 1, 'C');
-    $this->pdf->Cell(0, 10, 'Téléphone : 338000000', 0, 1, 'C');
-    $this->pdf->Cell(0, 10, 'Email : boutiquebi@boutiquebi.sn', 0, 1, 'C');
+    $this->pdf->Cell(0, 7, 'Téléphone : 338000000', 0, 1, 'C');
+    $this->pdf->Cell(0, 7, 'Email : boutiquebi@boutiquebi.sn', 0, 1, 'C');
+    $this->pdf->Cell(0, 7, 'Date :'.date("d-m-Y"), 0, 1, 'C');
 
     // Ajouter une ligne de séparation
-    $this->pdf->Ln(10);
+    $this->pdf->Ln(3);
     $this->pdf->Cell(0, 0, '', 'T', 1, 'C');
-    $this->pdf->Ln(10);
+    $this->pdf->Ln(3);
 
     // Informations du Client
     $this->pdf->SetFont('helvetica', 'B', 14);
-    $this->pdf->Cell(0, 10, 'Informations du Client', 0, 1, 'L');
+    $this->pdf->Cell(0, 7, 'Informations du Client', 0, 1, 'L');
     $this->pdf->SetFont('helvetica', '', 12);
     $this->pdf->Cell(0, 10, 'Nom: ' . $info->nomc, 0, 1);
-    $this->pdf->Cell(0, 10, 'Prenom: ' . $info->prenomc, 0, 1);
-    $this->pdf->Cell(0, 10, 'Telephone: ' . $info->tel, 0, 1);
-    $this->pdf->Cell(0, 10, 'Email: ' . $info->email, 0, 1);
-    $this->pdf->Cell(0, 10, 'Adresse: ' . $info->adresse, 0, 1);
+    $this->pdf->Cell(0, 7, 'Prenom: ' . $info->prenomc, 0, 1);
+    $this->pdf->Cell(0, 7, 'Telephone: ' . $info->tel, 0, 1);
+    $this->pdf->Cell(0, 7, 'Email: ' . $info->email, 0, 1);
+    $this->pdf->Cell(0, 7, 'Adresse: ' . $info->adresse, 0, 1);
 
     // Ajouter une ligne de séparation
-    $this->pdf->Ln(10);
+    $this->pdf->Ln(3);
     $this->pdf->Cell(0, 0, '', 'T', 1, 'C');
-    $this->pdf->Ln(10);
+    $this->pdf->Ln(3);
 
     // Détails de la Transaction
     $this->pdf->SetFont('helvetica', 'B', 14);
     $this->pdf->Cell(0, 10, 'Détails de la Transaction', 0, 1, 'L');
     $this->pdf->SetFont('helvetica', '', 12);
-    $this->pdf->Cell(0, 10, 'Numero Dette: ' . $info->numerodet, 0, 1);
-    $this->pdf->Cell(0, 10, 'Montant Dette: ' . $info->montantdet, 0, 1);
-    $this->pdf->Cell(0, 10, 'Numero Paiement: ' . $info->numeropay, 0, 1);
-    $this->pdf->Cell(0, 10, 'Montant Paiement: ' . $info->montantpay . ' Fcfa', 0, 1);
-    $this->pdf->Cell(0, 10, 'Restant à payer: ' . $info->restant . ' Fcfa', 0, 1);
+    $this->pdf->Cell(0, 7, 'Numero Dette: ' . $info->numerodet, 0, 1);
+    $this->pdf->Cell(0, 7, 'Montant Dette: ' . $info->montantdet. ' Fcfa', 0, 1);
+    $this->pdf->Cell(0, 7, 'Numero Paiement: ' . $info->numeropay, 0, 1);
+    $this->pdf->Cell(0, 7, 'Montant Paiement: ' . $info->montantpay . ' Fcfa', 0, 1);
+    $this->pdf->Cell(0, 7, 'Date Paiement: ' . $info->datepay, 0, 1);
 
     // Génération du PDF
     $filename = 'recu_paiement_' . $info->numeropay;

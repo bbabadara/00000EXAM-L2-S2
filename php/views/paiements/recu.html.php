@@ -1,6 +1,7 @@
 <div class="bg-gray-100 p-4 h-max ">
     <div class="max-w-md mx-auto bg-white p-4 rounded-lg shadow-lg">
-        <h1 class="text-2xl font-bold mb-4 text-center">Reçu de Paiement</h1>
+        <h1 class="text-2xl font-bold mb-1 text-center">Reçu de Paiement</h1>
+        <h1 class="text-sm font-bold mb-2 text-center"><?=date("d-m-Y")?></h1>
         
         <div class="mb-4">
             <h2 class="text-lg font-semibold">Boutique Bi</h2>
@@ -20,10 +21,10 @@
         <div class="mb-4 border-t border-gray-300 pt-4">
             <h2 class="text-lg font-semibold">Détails de la Transaction</h2>
             <p class="text-gray-700">Numero Dette: <?=$info->numerodet?> </p>
-            <p class="text-gray-700">Montant Dette: <?=$info->montantdet?> </p>
+            <p class="text-gray-700">Montant Dette: <?=$info->montantdet?> Fcfa</p>
             <p class="text-gray-700">Numero Paiement: <?=$info->numeropay?></p>
             <p class="text-gray-700">Montant Paiement: <?=$info->montantpay?> Fcfa</p>
-            <p class="text-gray-700">Restant à payer: <?=$info->restant?> Fcfa</p>
+            <p class="text-gray-700">Date Paiement: <?=$info->datepay?> </p>
         </div>
 
         <div class="mt-5 text-center">
