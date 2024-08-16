@@ -9,7 +9,6 @@ use Boutik\Models\ClientModel;
 use Boutik\Models\DetteModel;
 use Boutik\Models\PaiementModel;
 
-use TCPDF;
 
 class DetteController  extends CoreController
 {
@@ -19,7 +18,6 @@ class DetteController  extends CoreController
     private PaiementModel $paiementModel;
     private ClientModel $clientModel;
 
-    private TCPDF $pdf;
     public function __construct()
     {
         parent::__construct();
@@ -28,7 +26,6 @@ class DetteController  extends CoreController
         $this->articleModel = new ArticleModel();
         $this->paiementModel = new PaiementModel();
         $this->clientModel = new ClientModel();
-        $this->pdf = new TCPDF();
     }
     public function load()
     {
@@ -248,22 +245,4 @@ class DetteController  extends CoreController
     }
 
 
-
-    public function generateRecu($data)
-    {
-        $this->pdf->AddPage();
-        $this->pdf->SetFont('helvetica', 'B', 16);
-
-        // Titre
-        $this->pdf->Cell(0, 10, 'Reçu de Paiement', 0, 1, 'C');
-
-        // Contenu
-        $this->pdf->SetFont('helvetica', '', 12);
-        $this->pdf->Cell(0, 10, 'Numero: ' . $data['numeropay'], 0, 1);
-        $this->pdf->Cell(0, 10, 'Montant: ' . $data['montantpay'] . ' Fcfa', 0, 1);
-        $this->pdf->Cell(0, 10, 'Date: ' . $data['datepay'], 0, 1);
-
-        // Génère le PDF
-        $this->pdf->Output('recu_paiement_' . $data['numeropay'] . '.pdf', 'I');
-    }
 }

@@ -19,6 +19,12 @@ public function findAllByDetteId($id){
     $sql="SELECT * from paiement where idDette=$id";
     return parent::doSelect($sql);
 }
+public function findByIdWithClientAndDette($id){
+    $sql="SELECT p.*, d.*, c.*, (d.montantdet - COALESCE(SUM(pmt.montantpay), 0)) AS restant
+     FROM paiement p JOIN dette d ON p.idDette = d.iddet JOIN client c ON d.idClient = c.idcl
+     LEFT JOIN paiement pmt ON d.iddet = pmt.idDette WHERE p.idpay =$id";
+    return parent::doSelect($sql,true);
+}
 
 public function getPaiementToday(){
     $sql="SELECT p.*,d.iddet FROM paiement p JOIN dette d ON p.idDette = d.iddet WHERE p.datepay = CURDATE()";

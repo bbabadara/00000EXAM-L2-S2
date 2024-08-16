@@ -25,7 +25,7 @@ class PaiementController  extends CoreController
             if ($action=="addpaiement") {
                 $this->addPaiement();
             }elseif ($action=="recu") {
-                echo "ok";
+                $this->AfficheRecu();
             }
         }
     }
@@ -40,8 +40,8 @@ class PaiementController  extends CoreController
                     parent::unsetKey($_POST, ["controller", "verif", "action", "restant"]);
                     $_POST["numeropay"] = self::genererNumeroPAY();
                     $_POST["datepay"] = date("Y-m-d");
-                    $this->paiementModel->doInsert("paiement", $_POST);
-                    // self::generateRecu($_POST);
+                   $idPay= $this->paiementModel->doInsert("paiement", $_POST);
+                    parent::redirect("paiement", "recu", ["key" => $idPay]);
                 } else {
                     $this->session->addAsoc("errors", "montantpay", "le montant doit etre inferieur ou egal au montant restant");
                 }
@@ -51,27 +51,74 @@ class PaiementController  extends CoreController
             parent::redirect("dettes", "detail", ["idDette" => $_POST["idDette"]]);
     }
 
+    public function AfficheRecu(){
+        $idPay = $_GET["key"];
+       $info= $this->paiementModel->findByIdWithClientAndDette($idPay);
+       if ($_REQUEST["verif"]) {
+        $verif=$_REQUEST["verif"];
+        if ($verif=="download") {
+           $this->generateRecu($info);
+        }elseif ($verif=="print") {
+            echo "print";
+        }
+       }
+        parent::loadview("paiements/recu",[
+            "info"=>$info
+        ]);
+    }
+
     public function genererNumeroPAY()
     {
         $n = mt_rand(0, 9999999999);
         return 'PAY' . str_pad($n, 10, '0', STR_PAD_LEFT);
     }
 
-    public function generateRecu($data)
-    {
-        $this->pdf->AddPage();
-        $this->pdf->SetFont('helvetica', 'B', 16);
+    
 
-        // Titre
-        $this->pdf->Cell(0, 10, 'Reçu de Paiement', 0, 1, 'C');
+    public function generateRecu($info)
+{
+    $this->pdf->AddPage();
+    $this->pdf->SetFont('helvetica', 'B', 16);
+    // Section Boutique
+    $this->pdf->Cell(0, 10, 'Boutique Bi', 0, 1, 'C');
+    $this->pdf->SetFont('helvetica', '', 12);
+    $this->pdf->Cell(0, 10, 'Dieupeul Dakar', 0, 1, 'C');
+    $this->pdf->Cell(0, 10, 'Téléphone : 338000000', 0, 1, 'C');
+    $this->pdf->Cell(0, 10, 'Email : boutiquebi@boutiquebi.sn', 0, 1, 'C');
 
-        // Contenu
-        $this->pdf->SetFont('helvetica', '', 12);
-        $this->pdf->Cell(0, 10, 'Numero: ' . $data['numeropay'], 0, 1);
-        $this->pdf->Cell(0, 10, 'Montant: ' . $data['montantpay'] . ' Fcfa', 0, 1);
-        $this->pdf->Cell(0, 10, 'Date: ' . $data['datepay'], 0, 1);
+    // Ajouter une ligne de séparation
+    $this->pdf->Ln(10);
+    $this->pdf->Cell(0, 0, '', 'T', 1, 'C');
+    $this->pdf->Ln(10);
 
-        // Génère le PDF
-        $this->pdf->Output('recu_paiement_' . $data['numeropay'] . '.pdf', 'I');
-    }
+    // Informations du Client
+    $this->pdf->SetFont('helvetica', 'B', 14);
+    $this->pdf->Cell(0, 10, 'Informations du Client', 0, 1, 'L');
+    $this->pdf->SetFont('helvetica', '', 12);
+    $this->pdf->Cell(0, 10, 'Nom: ' . $info->nomc, 0, 1);
+    $this->pdf->Cell(0, 10, 'Prenom: ' . $info->prenomc, 0, 1);
+    $this->pdf->Cell(0, 10, 'Telephone: ' . $info->tel, 0, 1);
+    $this->pdf->Cell(0, 10, 'Email: ' . $info->email, 0, 1);
+    $this->pdf->Cell(0, 10, 'Adresse: ' . $info->adresse, 0, 1);
+
+    // Ajouter une ligne de séparation
+    $this->pdf->Ln(10);
+    $this->pdf->Cell(0, 0, '', 'T', 1, 'C');
+    $this->pdf->Ln(10);
+
+    // Détails de la Transaction
+    $this->pdf->SetFont('helvetica', 'B', 14);
+    $this->pdf->Cell(0, 10, 'Détails de la Transaction', 0, 1, 'L');
+    $this->pdf->SetFont('helvetica', '', 12);
+    $this->pdf->Cell(0, 10, 'Numero Dette: ' . $info->numerodet, 0, 1);
+    $this->pdf->Cell(0, 10, 'Montant Dette: ' . $info->montantdet, 0, 1);
+    $this->pdf->Cell(0, 10, 'Numero Paiement: ' . $info->numeropay, 0, 1);
+    $this->pdf->Cell(0, 10, 'Montant Paiement: ' . $info->montantpay . ' Fcfa', 0, 1);
+    $this->pdf->Cell(0, 10, 'Restant à payer: ' . $info->restant . ' Fcfa', 0, 1);
+
+    // Génération du PDF
+    $filename = 'recu_paiement_' . $info->numeropay;
+    $this->pdf->Output($filename . '.pdf', 'I');
+}
+
 }
