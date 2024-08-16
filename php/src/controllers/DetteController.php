@@ -72,7 +72,7 @@ class DetteController  extends CoreController
     {
 
         if (isset($_REQUEST["idDette"])) {
-           u
+            $key = $_REQUEST["idDette"];
             $elementPerPage = 4;
             $page = $_REQUEST["page"] ?? "1";
             $offset = ($page - 1) * $elementPerPage;
