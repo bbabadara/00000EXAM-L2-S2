@@ -18,7 +18,7 @@ class DetteController  extends CoreController
     private ErrorsController $errorsController;
     private PaiementModel $paiementModel;
     private ClientModel $clientModel;
-   
+
     private TCPDF $pdf;
     public function __construct()
     {
@@ -70,21 +70,26 @@ class DetteController  extends CoreController
     }
     public function showDetailsDette()
     {
-        if (isset($_REQUEST["idDette"])) {
-            $key = $_REQUEST["idDette"];
-            if (isset($_REQUEST["verif"]) && $_REQUEST["verif"] == "addpay") {
-                $paimentController=new PaiementController();
-                $paimentController->load();
-               
-            }
-            $dette = $this->detteModel->findById($key);
 
+        if (isset($_REQUEST["idDette"])) {
+           u
+            $elementPerPage = 4;
+            $page = $_REQUEST["page"] ?? "1";
+            $offset = ($page - 1) * $elementPerPage;
+            $datas = $this->paiementModel->findBy(["idDette" => $key], $offset);
+            $paiements = $datas["datas"];
+            $count = $datas['count']->count;
+            $nbrPage = ceil($count / $elementPerPage);
+            $dette = $this->detteModel->findById($key);
             $disable = $dette->restant == 0 ? "disabled" : "";
             parent::loadview("dettes/detailDette", [
                 "dette" => $dette,
                 "articles" => $this->articleModel->findByDetteId($key),
-                "paiements" => $this->paiementModel->findAllByDetteId($key),
-                "disable" => $disable
+                "paiements" => $paiements,
+                "disable" => $disable,
+                "page" => $page,
+                "nbrPage" => $nbrPage,
+                "idDette" => $key
             ]);
         } else {
             $this->errorsController->load404();
@@ -100,46 +105,46 @@ class DetteController  extends CoreController
                 $this->findArt();
             } elseif ($verif == "sltqte") {
                 $this->selectQte();
-              
             } elseif ($verif == "remove") {
-                self::updateQteArticleAfterRemove($this->session->get("tabArticle"),$_SESSION["article"]);
+                self::updateQteArticleAfterRemove($this->session->get("tabArticle"), $_SESSION["article"]);
                 $this->session->unset2("tabArticle", $_REQUEST["key"]);
-                parent::redirect("dettes","add");
+                parent::redirect("dettes", "add");
             } elseif ($verif == "saveDette") {
                 $this->saveDette();
-                
             }
         }
 
         parent::loadview("dettes/ajoutDette");
     }
 
-    public function findByTel(){
+    public function findByTel()
+    {
         $this->session->unset("client");
-                $this->session->unset("article");
-                $this->session->add("tabArticle", []);
-                $this->validator->isNumeric("telsearch");
-                $this->validator->isEmpty("telsearch");
-                if ($this->validator->validate($this->validator->errors)) {
-                    $client = $this->clientModel->findByTel($_REQUEST["telsearch"]);
-                    if ($client) {
-                        $this->session->add("client", $client);
-                    } else {
-                        $this->session->addAsoc("errors", "telsearch", "ce client n'existe pas");
-                    }
-                } else {
-                    $this->session->add("errors", $this->validator->errors);
-                }
-                parent::redirect("dettes","add");
+        $this->session->unset("article");
+        $this->session->add("tabArticle", []);
+        $this->validator->isNumeric("telsearch");
+        $this->validator->isEmpty("telsearch");
+        if ($this->validator->validate($this->validator->errors)) {
+            $client = $this->clientModel->findByTel($_REQUEST["telsearch"]);
+            if ($client) {
+                $this->session->add("client", $client);
+            } else {
+                $this->session->addAsoc("errors", "telsearch", "ce client n'existe pas");
+            }
+        } else {
+            $this->session->add("errors", $this->validator->errors);
+        }
+        parent::redirect("dettes", "add");
     }
-    public function findArt(){
+    public function findArt()
+    {
         $this->session->unset("article");
         $this->validator->isEmpty("ref");
         if ($this->validator->validate($this->validator->errors)) {
             $article = $this->articleModel->getByRef($_REQUEST["ref"]);
             if ($article) {
-                if($this->session->isset("tabArticle")){
-                    self::updateQteArticleAfterSelect($this->session->get("tabArticle"),$article);
+                if ($this->session->isset("tabArticle")) {
+                    self::updateQteArticleAfterSelect($this->session->get("tabArticle"), $article);
                 }
                 $this->session->add("article", $article);
             } else {
@@ -148,16 +153,17 @@ class DetteController  extends CoreController
         } else {
             $this->session->add("errors", $this->validator->errors);
         }
-        parent::redirect("dettes","add");
+        parent::redirect("dettes", "add");
     }
-    public function selectQte(){
+    public function selectQte()
+    {
         $this->validator->isNumeric("qte");
         $this->validator->isPositif("qte");
         if ($this->validator->validate($this->validator->errors)) {
             if ($_REQUEST["qte"] <= $this->session->get("article")->qteStock) {
                 if (self::findArticleSessionByid($this->session->get("article")->idart, $this->session->get("tabArticle"))) {
                     self::updateQteTabArticle($this->session->get("article")->idart, $_SESSION["tabArticle"], $_REQUEST["qte"]);
-                    $this->session->get("article")->qteStock-=$_REQUEST["qte"];
+                    $this->session->get("article")->qteStock -= $_REQUEST["qte"];
                 } else {
                     $newAdd = [
                         "idart" => $this->session->get("article")->idart,
@@ -168,7 +174,7 @@ class DetteController  extends CoreController
                         "total" => $_REQUEST["qte"] * $this->session->get("article")->prixu
                     ];
                     $this->session->addtotable("tabArticle", $newAdd);
-                   $this->session->get("article")->qteStock-=$_REQUEST["qte"];
+                    $this->session->get("article")->qteStock -= $_REQUEST["qte"];
                 }
             } else {
                 $this->session->addAsoc("errors", "qte", "la quantite doit etre inferieur ou egal à la quantite en stock");
@@ -176,10 +182,11 @@ class DetteController  extends CoreController
         } else {
             $this->session->add("errors", $this->validator->errors);
         }
-        parent::redirect("dettes","add");
+        parent::redirect("dettes", "add");
     }
 
-    public function saveDette(){
+    public function saveDette()
+    {
         $nDette = [
             "numerodet" => self::genererNumeroDette(),
             "datedet" => date("Y-m-d"),
@@ -195,7 +202,7 @@ class DetteController  extends CoreController
         parent::redirect("dettes", "detail", ["idDette" => $idDette]);
     }
 
-   
+
     public function genererNumeroDette()
     {
         $n = mt_rand(0, 9999999999);
@@ -225,7 +232,7 @@ class DetteController  extends CoreController
     {
         foreach ($all as $key => $value) {
             if ($value["idart"] == $article->idart) {
-                $article->qteStock-=$all[$key]["qte"];
+                $article->qteStock -= $all[$key]["qte"];
                 break;
             }
         }
@@ -234,13 +241,13 @@ class DetteController  extends CoreController
     {
         foreach ($all as $key => $value) {
             if ($value["idart"] == $article->idart) {
-                $article->qteStock+=$all[$key]["qte"];
+                $article->qteStock += $all[$key]["qte"];
                 break;
             }
         }
     }
 
-  
+
 
     public function generateRecu($data)
     {
@@ -259,7 +266,4 @@ class DetteController  extends CoreController
         // Génère le PDF
         $this->pdf->Output('recu_paiement_' . $data['numeropay'] . '.pdf', 'I');
     }
-
- 
-
 }

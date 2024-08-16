@@ -6,6 +6,9 @@ use Boutik\Core\Model\CoreModel;
 class PaiementModel extends CoreModel{
     public function __construct() {
        parent::__construct();
+       $this->primaryKey="idpay";
+       $this->table="paiement";
+       $this->nbrElement=5;
 
     }
 public function getAll(){

@@ -14,14 +14,20 @@ class PaiementController  extends CoreController
         parent::__construct();
         $this->paiementModel = new PaiementModel();
         $this->pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
-
     }
 
     
     
     public function load()
     {
-        $this->addPaiement();
+        if (isset($_REQUEST["action"])) {
+            $action=$_REQUEST["action"];
+            if ($action=="addpaiement") {
+                $this->addPaiement();
+            }elseif ($action=="recu") {
+                echo "ok";
+            }
+        }
     }
 
 
@@ -35,14 +41,13 @@ class PaiementController  extends CoreController
                     $_POST["numeropay"] = self::genererNumeroPAY();
                     $_POST["datepay"] = date("Y-m-d");
                     $this->paiementModel->doInsert("paiement", $_POST);
-                    self::generateRecu($_POST);
+                    // self::generateRecu($_POST);
                 } else {
                     $this->session->addAsoc("errors", "montantpay", "le montant doit etre inferieur ou egal au montant restant");
                 }
             } else {
                 $this->session->add("errors", $this->validator->errors);
             }
-        
             parent::redirect("dettes", "detail", ["idDette" => $_POST["idDette"]]);
     }
 

@@ -1,6 +1,7 @@
 <?php
 namespace Boutik\Core\Routeur;
 use Boutik\Controllers\DetteController;
+use Boutik\Controllers\PaiementController;
 use Boutik\Controllers\SecurityController;
 use Boutik\Controllers\UserController;
 use Boutik\Core\Controller\CoreController;
@@ -36,6 +37,9 @@ class Routeur
                 $controller->load();
             } elseif ($recup == "user") {
                 $controller=new UserController();
+                $controller->load();
+            } elseif ($recup == "paiement") {
+                $controller=new PaiementController();
                 $controller->load();
             }else{
                 echo "on y viendra";
