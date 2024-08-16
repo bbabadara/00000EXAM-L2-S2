@@ -102,7 +102,9 @@ class DetteController  extends CoreController
                 $this->selectQte();
               
             } elseif ($verif == "remove") {
+                self::updateQteArticleAfterRemove($this->session->get("tabArticle"),$_SESSION["article"]);
                 $this->session->unset2("tabArticle", $_REQUEST["key"]);
+                parent::redirect("dettes","add");
             } elseif ($verif == "saveDette") {
                 $this->saveDette();
                 
@@ -128,6 +130,7 @@ class DetteController  extends CoreController
                 } else {
                     $this->session->add("errors", $this->validator->errors);
                 }
+                parent::redirect("dettes","add");
     }
     public function findArt(){
         $this->session->unset("article");
@@ -135,6 +138,9 @@ class DetteController  extends CoreController
         if ($this->validator->validate($this->validator->errors)) {
             $article = $this->articleModel->getByRef($_REQUEST["ref"]);
             if ($article) {
+                if($this->session->isset("tabArticle")){
+                    self::updateQteArticleAfterSelect($this->session->get("tabArticle"),$article);
+                }
                 $this->session->add("article", $article);
             } else {
                 $this->session->addAsoc("errors", "ref", "ce produit n'existe pas");
@@ -142,6 +148,7 @@ class DetteController  extends CoreController
         } else {
             $this->session->add("errors", $this->validator->errors);
         }
+        parent::redirect("dettes","add");
     }
     public function selectQte(){
         $this->validator->isNumeric("qte");
@@ -150,6 +157,7 @@ class DetteController  extends CoreController
             if ($_REQUEST["qte"] <= $this->session->get("article")->qteStock) {
                 if (self::findArticleSessionByid($this->session->get("article")->idart, $this->session->get("tabArticle"))) {
                     self::updateQteTabArticle($this->session->get("article")->idart, $_SESSION["tabArticle"], $_REQUEST["qte"]);
+                    $this->session->get("article")->qteStock-=$_REQUEST["qte"];
                 } else {
                     $newAdd = [
                         "idart" => $this->session->get("article")->idart,
@@ -160,6 +168,7 @@ class DetteController  extends CoreController
                         "total" => $_REQUEST["qte"] * $this->session->get("article")->prixu
                     ];
                     $this->session->addtotable("tabArticle", $newAdd);
+                   $this->session->get("article")->qteStock-=$_REQUEST["qte"];
                 }
             } else {
                 $this->session->addAsoc("errors", "qte", "la quantite doit etre inferieur ou egal à la quantite en stock");
@@ -167,6 +176,7 @@ class DetteController  extends CoreController
         } else {
             $this->session->add("errors", $this->validator->errors);
         }
+        parent::redirect("dettes","add");
     }
 
     public function saveDette(){
@@ -206,21 +216,31 @@ class DetteController  extends CoreController
     {
         foreach ($all as $key => $value) {
             if ($value["idart"] == $ref) {
-                $all[$key]["qte"] = $all[$key]["qte"] + $qte;
+                $all[$key]["qte"] += $qte;
                 break;
             }
         }
     }
-    public function updateQteArticleSession($ref, &$all, $qte)
+    public function updateQteArticleAfterSelect($all, &$article)
     {
-
         foreach ($all as $key => $value) {
-            if ($value["libelle"] == $ref) {
-                $all[$key]["qtestock"] -= $qte;
+            if ($value["idart"] == $article->idart) {
+                $article->qteStock-=$all[$key]["qte"];
                 break;
             }
         }
     }
+    public function updateQteArticleAfterRemove($all, &$article)
+    {
+        foreach ($all as $key => $value) {
+            if ($value["idart"] == $article->idart) {
+                $article->qteStock+=$all[$key]["qte"];
+                break;
+            }
+        }
+    }
+
+  
 
     public function generateRecu($data)
     {

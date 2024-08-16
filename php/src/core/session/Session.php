@@ -16,6 +16,12 @@ class Session {
     public function addAsoc (string $tab,string $key,$value){
         $_SESSION[$tab][$key]=$value;
     }
+    public function addAsocIncrease (string $tab,string $key,$value){
+        $_SESSION[$tab][$key]+=$value;
+    }
+    public function addAsocDecrease (string $tab,string $key,$value){
+        $_SESSION[$tab][$key]-=$value;
+    }
     public function get (string $key){
         return $_SESSION[$key];
     }

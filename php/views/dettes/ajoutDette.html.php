@@ -16,12 +16,11 @@ if ($this->session->isset("article")) {
 if ($this->session->isset("tabArticle")) {
     $tabArticle = $this->session->get("tabArticle");
 }
-// $this->dd($_SESSION["client"]);
 ?>
 <div class="p-4 border-1 border-gray-200  rounded-lg dark:border-gray-700 ">
     <h1 class="text-gray-900 text-2xl text-bold ">Enregistrer une dettes</h1>
     <!-- Partie recherche client -->
-    <form class="max-w-md mt-3" method="get">
+    <form class="max-w-md mt-3" method="post">
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">search</label>
         <div class="relative">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -71,7 +70,7 @@ if ($this->session->isset("tabArticle")) {
                             </div>
                             <input type="hidden" name="controller" value="dettes">
                             <input type="hidden" name="verif" value="findart">
-                            <button type="submit" class="text-white  mb-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-1 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >OK</button>
+                            <button type="submit" class="text-white  mb-4 <?=empty($client)?"bg-blue-400":"bg-blue-700"?> hover:<?=empty($client)?"bg-blue-500":"bg-blue-800"?> focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-1 py-2 text-center dark:<?=empty($client)?"bg-blue-300":"bg-blue-600"?> dark:hover:<?=empty($client)?"bg-blue-500":"bg-blue-700"?> dark:focus:ring-blue-800" <?=empty($client)?"disabled":""?> >OK</button>
                         </div>
                         <p class="text-sm text-red-600 dark:text-red-400"> <?= $errors["ref"] ?? ""?> </p>
                     </form>
@@ -88,7 +87,7 @@ if ($this->session->isset("tabArticle")) {
                             </div>
                             <input type="hidden" name="controller" value="dettes">
                             <input type="hidden" name="verif" value="sltqte">
-                            <button type="submit" class="text-white  mb-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-1 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >OK</button>
+                            <button type="submit" class="text-white  mb-4 <?=empty($article)?"bg-blue-400":"bg-blue-700"?> hover:<?=empty($article)?"bg-blue-500":"bg-blue-800"?> focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-1 py-2 text-center dark:<?=empty($article)?"bg-blue-300":"bg-blue-600"?> dark:hover:<?=empty($article)?"bg-blue-500":"bg-blue-700"?> dark:focus:ring-blue-800" <?=empty($article)?"disabled":""?> >OK</button>
                         </div>
                         <p class="text-sm text-red-600 dark:text-red-400"> <?= $errors["qte"] ?? ""?> </p>
                     </form>
@@ -188,7 +187,7 @@ if ($this->session->isset("tabArticle")) {
             <input type="hidden" name="verif" value="saveDette">
             <input type="hidden" name="controller" value="dettes">
             <input type="hidden" name="montant" value="<?= $som?>">
-            <button type="submit" name="action" value="add"  class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Enregister</button>
+            <button type="submit" name="action" value="add"  class="text-white <?=empty($tabArticle)?"bg-blue-400":"bg-blue-700"?>  hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center me-2 mb-2 dark:<?=empty($tabArticle)?"bg-blue-300":"bg-blue-600"?>  dark:hover:<?=empty($tabArticle)?"bg-blue-400":"bg-blue-700"?> dark:focus:ring-blue-800" <?=empty($tabArticle)?"disabled":""?> >Enregister</button>
         </form>
     </div>
 
