@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Renseignement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<div class="container mx-auto my-8 p-6 bg-white rounded-lg shadow-lg">
+
+    <!-- Header Information -->
+    <div class="flex justify-between items-center mb-8">
+        <div class="flex items-center space-x-4">
+            <div class="w-24 h-24 rounded-full bg-gray-300 flex justify-center items-center">
+                <img src="path/to/avatar.png" alt="Avatar" class="rounded-full">
+            </div>
+            <div>
+                <p class="text-sm text-gray-600">Matricule : EC-001-2019</p>
+                <p class="text-xl font-bold">Prénom : OUMOU</p>
+                <p class="text-xl font-bold">Nom : SYLLA</p>
+            </div>
+        </div>
+
+        <div>
+            <p class="text-sm text-gray-600">Sexe : Féminin</p>
+            <p class="text-sm text-gray-600">Date De Naissance : 01/01/2004</p>
+            <p class="text-sm text-gray-600">Lieu De Naissance : DAKAR</p>
+        </div>
+
+        <div>
+            <p class="text-sm text-gray-600">Téléphone : 77 000 00 00</p>
+            <p class="text-sm text-gray-600">Email : oumou@gmail.com</p>
+            <p class="text-sm text-gray-600">Adresse : Keur Massar</p>
+        </div>
+    </div>
+
+    <!-- Navigation Sidebar -->
+    <div class="flex">
+        <div class="w-1/4">
+            <ul class="space-y-2 text-gray-700">
+                <li class="p-2 bg-red-200 rounded cursor-pointer">Fiche De Renseignement</li>
+                <li class="p-2 hover:bg-gray-200 rounded cursor-pointer">Changement De Classe</li>
+                <li class="p-2 hover:bg-gray-200 rounded cursor-pointer">Changement De Filières</li>
+                <li class="p-2 hover:bg-gray-200 rounded cursor-pointer">Visualiser Carte Étudiant</li>
+                <li class="p-2 hover:bg-gray-200 rounded cursor-pointer">Parcours Étudiant</li>
+            </ul>
+        </div>
+
+        <!-- Main Form -->
+        <div class="w-3/4 ml-4">
+            <div class="bg-gray-100 p-4 rounded-lg mb-6">
+                <h2 class="text-lg font-bold mb-4">Identification</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-700">Prénom</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="Oumou">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Date De Naissance</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="01/01/2004">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Genre</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="Féminin">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Existance Extrait</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="Non">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Nom</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="Sylla">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Lieu De Naissance</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="DAKAR">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Orphelin</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="De Père">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Numéro De L'Extrait</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="Null">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-100 p-4 rounded-lg">
+                <h2 class="text-lg font-bold mb-4">Autres Informations</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-700">Email</label>
+                        <input type="email" class="w-full mt-1 p-2 border border-gray-300 rounded" value="oumou@gmail.com">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Adresse</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="Keur Massar">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Groupe Sanguin</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="Aucun">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Téléphone</label>
+                        <input type="tel" class="w-full mt-1 p-2 border border-gray-300 rounded" value="+221 77 000 00 00">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Classe Redoublée</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="Neant">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Statut</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="Passant">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Nom Complet Tuteur</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded" value="Amsa Sylla">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Téléphone Tuteur</label>
+                        <input type="tel" class="w-full mt-1 p-2 border border-gray-300 rounded" value="+221 76 000 00 00">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

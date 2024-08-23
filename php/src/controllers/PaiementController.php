@@ -52,9 +52,9 @@ class PaiementController  extends CoreController
     }
 
     public function AfficheRecu(){
-        $idPay = $_GET["key"];
+        $idPay = $_REQUEST["key"];
        $info= $this->paiementModel->findByIdWithClientAndDette($idPay);
-       if ($_REQUEST["verif"]) {
+       if (isset($_REQUEST["verif"])) {
         $verif=$_REQUEST["verif"];
         if ($verif=="download") {
            $this->generateRecu($info);

@@ -116,6 +116,9 @@ if ($this->session->isset("errors")) {
                                 <th scope="col" class="px-6 py-3">
                                     Montant
                                 </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Action
+                                </th>
                                 
                             </tr>
                         </thead>
@@ -133,9 +136,13 @@ if ($this->session->isset("errors")) {
                                 <td class="px-6 py-2">
                                 <?=$paiement->montantpay ?>
                                 </td>
+                                <td class="px-6 py-2">
+                                <a href="<?=$this->path("paiement","recu",["key"=>$paiement->idpay])?>">Voir Recu</a>
+                                </td>
                               
                             </tr>
                             <?php endforeach?>
+                            
 
                                                 
                         </tbody>

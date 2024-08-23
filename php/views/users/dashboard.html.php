@@ -1,4 +1,4 @@
-<div class="p-6">
+<div class="p-1">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Carte des statistiques -->
         <div class="bg-white p-4 rounded shadow-md">
@@ -21,7 +21,7 @@
             <p class="text-2xl font-bold"><?=$nbrPaiement??"0"?> </p>
         </div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-5">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-3">
         <!-- Carte des statistiques -->
         <div class="bg-white p-4 rounded shadow-md">
             <h2 class="text-gray-700 text-lg font-bold mb-2">Liste des dettes d'Aujourd'hui</h2>
@@ -37,11 +37,11 @@
     </div>
 
     <!-- Table des clients et filtres -->
-    <div class="mt-6 bg-white p-4 rounded shadow-md">
+    <div class="mt-2 bg-white p-2 rounded shadow-md">
         <h2 class="text-gray-700 text-lg font-bold mb-4">Liste des Clients</h2>
 
         <!-- filtres -->
-        <form class="mb-3 mt-3" action="" method="get">
+        <form class="mb-1 mt-1" action="" method="get">
             <div>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
                     <input type="text" name="nomc" placeholder="Filtrer par Nom" class="p-2 border rounded" value="<?= $filtre["nomc"]??""?>">
@@ -91,7 +91,7 @@
                 endif; ?>
             </tbody>
         </table>
-        <div class="w-full flex justify-end items-center mt-3">
+        <div class="w-full flex justify-end items-center mt-2">
             <nav aria-label="Page navigation example">
                 <ul class="inline-flex -space-x-px text-base h-10">
                 <?php if ($page>1): ?>

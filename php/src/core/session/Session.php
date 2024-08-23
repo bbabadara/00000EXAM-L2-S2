@@ -34,4 +34,9 @@ class Session {
     public function unset2 (string $key,$key2){
         unset($_SESSION[$key][$key2]);
     }
+    public function destroy(){
+        session_destroy();
+    } 
+    
+
 }
