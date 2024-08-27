@@ -23,6 +23,13 @@ class CoreController
         $cFV = ob_get_clean();
         require_once ROOT."/views/layouts/" . $layout . ".layout.php";
     }
+    public function loadJson($data){
+        $response=[
+            'status' => 200,
+            'data' => $data??null
+        ];
+         echo json_encode($response);
+    }
 
     public function path(string $controller, string $action, array $additional =[]): string
     {

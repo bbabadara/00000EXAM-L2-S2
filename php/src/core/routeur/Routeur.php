@@ -1,5 +1,8 @@
 <?php
 namespace Boutik\Core\Routeur;
+use Boutik\Controllers\ArticleJsController;
+use Boutik\Controllers\ClientJsController;
+use Boutik\Controllers\DepotJsController;
 use Boutik\Controllers\DetteController;
 use Boutik\Controllers\PaiementController;
 use Boutik\Controllers\SecurityController;
@@ -27,11 +30,14 @@ class Routeur
                 $controller=new DetteController;
                  $controller->load();
             } elseif ($recup == "articles") {
-                echo "articles";
+                $controller=new ArticleJsController();
+                 $controller->load();
             } elseif ($recup == "clients") {
-                echo "clients";
+                $controller=new ClientJsController;
+                 $controller->load();
             } elseif ($recup == "depots") {
-                echo "depots";
+                $controller=new DepotJsController();
+                $controller->load();
             } elseif ($recup == "security") {
                 $controller=new SecurityController;
                 $controller->load();

@@ -84,7 +84,7 @@
                             <td class="border-b p-4"><?= $client->email ?></td>
                             <td class="border-b p-4"><?= $client->adresse ?></td>
                             <td class="border-b p-4"><?= $client->categorie ?></td>
-                            <td class="border-b p-4"><a href="<?=$this->path("client","fiche",["idcl"=>$client->idcl])?>"><span class="material-symbols-outlined"> read_more </span></a></td>
+                            <td class="border-b p-4"><a href="<?=$this->path("clients","fiche",["idcl"=>$client->idcl])?>"><span class="material-symbols-outlined"> read_more </span></a></td>
 
                         </tr>
                 <?php endforeach;

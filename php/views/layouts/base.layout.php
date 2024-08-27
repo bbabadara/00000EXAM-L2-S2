@@ -12,8 +12,7 @@ if ($this->session->isset("userConnect")) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All dettes</title>
     <link rel="stylesheet" href="css/styles.css">
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" /> -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -109,14 +108,14 @@ if ($this->session->isset("userConnect")) {
                 <li>
                     <a href="<?=$this->path("clients","liste")?>"
                         class="flex items-center p-2 text-gray-50 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-400 dark:<?=$_REQUEST['controller']=='clients'?'bg-gray-400':''?> group">
-                        <span class="material-symbols-outlined"> person </span>
+                        <span class="material-symbols-outlined"> groups </span>
                         <span class="flex-1 ms-3 whitespace-nowrap">Clients</span>
                     </a>
                 </li>
                 <li>
                     <a href="<?=$this->path("articles","liste")?>"
                         class="flex items-center p-2 text-gray-50 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-400 dark:<?=$_REQUEST['controller']=='articles'?'bg-gray-400':''?> group">
-                        <span class="material-symbols-outlined"> person </span>
+                        <span class="material-symbols-outlined"> category </span>
                         <span class="flex-1 ms-3 whitespace-nowrap">Articles</span>
                     </a>
                 </li>
@@ -125,6 +124,14 @@ if ($this->session->isset("userConnect")) {
                         class="flex items-center p-2 text-gray-50 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-400 dark:<?=$_REQUEST['controller']=='dettes'?'bg-gray-400':''?> group">
                         <span class="material-symbols-outlined"> inbox </span>
                         <span class="flex-1 ms-3 whitespace-nowrap">Dettes</span>
+                        
+                    </a>
+                </li>
+                <li>
+                    <a href="<?=$this->path("depots","liste")?>"
+                        class="flex items-center p-2 text-gray-50 rounded-lg dark:text-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-400 dark:<?=$_REQUEST['controller']=='depots'?'bg-gray-400':''?> group">
+                        <span class="material-symbols-outlined"> account_balance </span>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Depot</span>
                         
                     </a>
                 </li>

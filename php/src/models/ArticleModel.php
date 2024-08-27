@@ -6,6 +6,9 @@ use Boutik\Core\Model\CoreModel;
 class ArticleModel extends CoreModel{
     public function __construct() {
        parent::__construct();
+       $this->table="article";
+       $this->primaryKey="idart";
+       $this->nbrElement=5;
 
     }
 public function getAll(){
