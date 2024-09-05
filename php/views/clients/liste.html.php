@@ -105,7 +105,7 @@ if ($this->session->isset("errors")) {
                                 <?= $client->montantseuil ?>
                             </td>
                             <td class="border-b p-4">
-                                <a href="<?= $this->path("clients", "fiche", ["idclient" => $client->idcl]) ?>"
+                                <a href="<?= $this->path("clients", "fiche", ["idcl" => $client->idcl]) ?>"
                                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><span class="material-symbols-outlined"> read_more </span></a>
                             </td>
                         </tr>

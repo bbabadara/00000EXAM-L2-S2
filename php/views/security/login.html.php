@@ -22,7 +22,7 @@ if ($this->session->isset("userLog")) {
         <div class="flex items-center p-4 mt-5 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50  dark:text-red-500 dark:border-red-800" role="alert">
           <span class="material-symbols-outlined flex-shrink-0 inline w-4 h-6 me-3"> info </span>
           <span class="sr-only">Info</span>
-          <div> <span class="font-medium">Attention!</span> Login ou mot de passe incorecte!</div>
+          <div> <span class="font-medium">Attention!</span> <?= $errors["alert"] ?? "Login ou mot de passe incorecte!" ?></div>
         </div>
         <?php endif?>
         <form class="mt-8 space-y-4" action="" method="post">

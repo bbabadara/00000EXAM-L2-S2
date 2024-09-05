@@ -41,7 +41,11 @@ class CoreModel
     {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($data);
+
     }
+   
+
+    
 
     public function selectALL()
     {

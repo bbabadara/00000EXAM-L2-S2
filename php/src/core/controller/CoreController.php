@@ -77,6 +77,10 @@ class CoreController
         var_dump($test);
         echo "</pre>";
     }
-
+    public function genererNumero(string $prefix)
+    {
+        $n = mt_rand(0, 9999999999);
+        return $prefix . str_pad($n, 10, '0', STR_PAD_LEFT);
+    }
   
 }

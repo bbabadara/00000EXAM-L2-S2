@@ -44,8 +44,12 @@ public function findByTel($tel){
     return parent::doSelect($sql);
 }
 public function findById($id){
-     $sql="SELECT d.*, cl.*, COALESCE(SUM(p.montantpay), 0) AS verse, (d.montantdet - COALESCE(SUM(p.montantpay), 0)) AS restant FROM dette d JOIN client cl ON d.idClient = cl.idcl LEFT JOIN paiement p ON d.iddet = p.idDette WHERE d.iddet = $id GROUP BY d.iddet;";
+     $sql="SELECT d.*, cl.*, COALESCE(SUM(p.montantpay), 0) AS verse, (d.montantdet - COALESCE(SUM(p.montantpay), 0)) AS restant FROM dette d JOIN client cl ON d.idClient = cl.idcl LEFT JOIN paiement p ON d.iddet = p.idDette WHERE d.iddet = '$id' GROUP BY d.iddet;";
     return parent::doSelect($sql,true);
+}
+public function findByIdClient($id){
+     $sql="SELECT d.*, cl.*, COALESCE(SUM(p.montantpay), 0) AS verse, (d.montantdet - COALESCE(SUM(p.montantpay), 0)) AS restant FROM dette d JOIN client cl ON d.idClient = cl.idcl LEFT JOIN paiement p ON d.iddet = p.idDette WHERE cl.idcl = '$id' GROUP BY d.iddet;";
+    return parent::doSelect($sql);
 }
 public function addToArtDette($iddette,$table){
     foreach ($table as $value) {

@@ -90,6 +90,8 @@ if ($this->session->isset("errors")) {
              <!-- Partie paiement -->
              <h1 class="text-gray-900 text-2xl text-bold ">Liste des paiement(<?=count($paiements)?>)</h1>
              <div class="w-10/12 mt-2">
+             <?php if($this->session->getRole()!="Client"):?>
+
                 <form class=" "  method="post">
                     <div class=" w-full flex items-center ">
                         <input type="text"  id="art" aria-label="art" name="montantpay"  aria-describedby="helper-text-explanation" class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
@@ -102,6 +104,8 @@ if ($this->session->isset("errors")) {
                        <p class="mt-2 text-sm text-red-600 dark:text-red-400"> <?=$errors["montantpay"]??""?></p>
 
                 </form>
+                <?php endif?>
+
 
                 <div class="relative mt-3 overflow-x-auto w-full shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-center text-left rtl:text-right text-gray-500 dark:text-gray-400">

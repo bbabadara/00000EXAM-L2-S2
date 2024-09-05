@@ -13,6 +13,7 @@ if ($this->session->isset("userConnect")) {
     <title>All dettes</title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -90,9 +91,8 @@ if ($this->session->isset("userConnect")) {
             </div>
         </div>
     </nav>
-
+<?php if($this->session->getRole()!="Client"):?>
     <!-- Partie SideBar -->
-
     <aside id="logo-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-gray-800  border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
         aria-label="Sidebar">
@@ -140,8 +140,10 @@ if ($this->session->isset("userConnect")) {
             </ul>
         </div>
     </aside>
+    <?php endif ?>
+
     <!-- Partie container -->
-    <div class="p-4 sm:ml-64 mt-14 ">
+    <div class="p-4 <?=$this->session->getRole()!="Client"?"sm:ml-64":""?> mt-12 ">
         <?= $cFV ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
